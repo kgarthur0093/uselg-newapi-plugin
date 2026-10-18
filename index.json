@@ -783,7 +783,7 @@
         {
           "version": "0.1.0",
           "path": "plugins/tasks/uselgv0-1/0.1.0/plugin.js",
-          "sha256": "570742fc575353505f3cdc199b0d0e01fa6663bf3c6bcdc655c45c9cb64958da",
+          "sha256": "6dcac1cf2316b18a1ccd16f668775732b8593a2c33e470dfafb9e53d98e52f17",
           "minApiVersion": 1,
           "kind": "task",
           "allowedHosts": [
@@ -796,7 +796,7 @@
       ],
       "iconFile": {
         "path": "plugins/tasks/uselgv0-1/icon.svg",
-        "sha256": "23be2523ca035abbe17f4cefa8d51457498e90c77c418a7f7a596181e3a34d18"
+        "sha256": "0ce3ca365941c01420c701af66db756c5520e9050768600781407e839a13c477"
       }
     }
   ]

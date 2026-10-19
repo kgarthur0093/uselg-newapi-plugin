@@ -1,27 +1,24 @@
 # uselgv0.1
 
-NewAPI Task Plugin API v1 适配器，适用于 New API 网关渠道，处理 Uselg 图片、视频和音乐任务以及相应的按张、按次、按秒用量。
+NewAPI Task Plugin API v1 适配器，适用于 Uselg 图片、视频和音乐模型。0.1.2 面向标准 OpenAI 兼容渠道，并依赖 NewAPI 的常规上游模型同步。
 
-## 渠道配置
+## 安装前提
 
-在 NewAPI rc.44 中保留内置 Sora，不要停用它。新增或编辑 **New API** 类型渠道（渠道类型不是 OpenAI），填写上游 API Base URL、API Key 和模型列表，然后在渠道高级设置的 `task_extend_plugin_keys` 中加入 `uselgv0-1`。插件会读取该渠道的 Base URL 与密钥，并按模型协议生成图片、视频或音乐请求。
+`uselgv0-1` 与 NewAPI rc.44 内置 `sora` 都声明 OpenAI 渠道类型 `1`，不能同时启用。使用本方案前，请先在 NewAPI 管理后台的 **任务插件** 页面停用内置 `sora`，再安装或升级到 `0.1.2`。这会让 Sora 插件不再提供服务；需要 Sora 时，应先停用 uselg 插件再重新启用 Sora。
 
-绑定示例：
+## 渠道设置
 
-```json
-{"task_extend_plugin_keys":["uselgv0-1"]}
-```
+1. 打开 **渠道管理 → 添加渠道**，类型选择 **OpenAI**。
+2. Base URL 填 `https://api.uselg.top`（不要额外添加 `/v1`），API Key 填该上游的密钥。NewAPI 的模型同步会向上游请求 `GET /v1/models`。
+3. 点击 **从上游获取**（标准 OpenAI 模型同步请求 `GET /v1/models`），选择需要的图片、视频、音乐模型并保存渠道。
+4. 计费按模型类型配置；本插件保留按图片张数、视频秒数/次、音乐次的用量字段。
 
-绑定插件需要管理员具有 `task_plugin.bind` 权限。New API 渠道仍可按普通网关方式同步 `/v1/models`；插件声明的媒体模型还必须出现在该渠道的模型列表中，或通过 NewAPI 的模型映射加入。
+## 模型支持范围
 
-插件模型目前在 `meta.models` 中静态声明。渠道同步出的模型只有在插件模型清单中，或被映射到清单中的受支持模型后，才能进入此插件的媒体适配流程。上游新增任意模型不会自动扩大插件的受支持集合。
+渠道的 **从上游获取** 可以同步上游返回的模型 ID，但插件的图片、视频、音乐任务协议和计费 schema 只适配 `meta.models` 中声明的模型。上游新增的未知 ID 即使出现在渠道列表，也不会自动获得媒体任务适配能力；需要先由插件新增协议与计费声明并发布新版，或映射到已支持且协议兼容的模型。
 
-## 与内置 Sora 共存
+## 版本
 
-本版本不声明普通 OpenAI 渠道类型 `1`，因此可以与 rc.44 内置 `sora` 同时启用。不要把插件绑定到 OpenAI 类型渠道；请使用上面的 New API 渠道扩展绑定。这样 Sora 继续处理自己的 OpenAI 渠道，uselgv0.1 处理绑定了它的 New API 渠道。
-
-## 版本标识
-
-- NewAPI 插件 key：`uselgv0-1`（key 只允许小写字母、数字、下划线和连字符）
-- 插件显示名：`uselgv0.1`
-- 插件版本：`0.1.1`
+- 插件 key：`uselgv0-1`
+- 显示名：`uselgv0.1`
+- 当前版本：`0.1.2`

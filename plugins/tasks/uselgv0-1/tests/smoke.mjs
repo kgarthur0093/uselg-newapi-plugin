@@ -1,5 +1,9 @@
 import assert from "node:assert/strict";
-import * as plugin from "../0.1.1/plugin.js";
+import * as plugin from "../0.1.2/plugin.js";
+
+assert.equal(plugin.meta.version, "0.1.2");
+assert.deepEqual(plugin.meta.channelTypes, [1]);
+assert.deepEqual(plugin.meta.upstreams, ["vendor"]);
 
 const base = { apiKey: "fixture-key", baseUrl: "https://api.ai-media.vip", publicTaskId: "public-1" };
 
@@ -221,9 +225,9 @@ assert.equal(signedImage.headers, undefined);
 
 assert.equal(plugin.meta.key, "uselgv0-1");
 assert.equal(plugin.meta.name, "uselgv0.1");
-assert.equal(plugin.meta.version, "0.1.1");
-assert.deepEqual(plugin.meta.upstreams, ["new_api"]);
-assert.equal(plugin.meta.channelTypes, undefined);
+assert.equal(plugin.meta.version, "0.1.2");
+assert.deepEqual(plugin.meta.upstreams, ["vendor"]);
+assert.deepEqual(plugin.meta.channelTypes, [1]);
 assert.throws(() => plugin.protocols.openai_video.decodeRequest({
   model: "brand-new-upstream-model",
   body: { kind: "json", value: { model: "brand-new-upstream-model", prompt: "future model" } },

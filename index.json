@@ -404,12 +404,9 @@
       "name": "uselgv0.1",
       "icon": "text:U",
       "description": {
-        "en": "OpenAI-compatible uselg media adapter for image, video and music channels",
-        "zh": "用于普通 OpenAI 兼容渠道的 uselg 图片、视频与音乐适配器"
+        "en": "New API gateway uselg image, video and music task adapter",
+        "zh": "用于 New API 网关渠道的 uselg 图片、视频与音乐任务适配器"
       },
-      "channelTypes": [
-        1
-      ],
       "routes": [],
       "protocols": [
         {
@@ -778,7 +775,7 @@
         "Lyria-3pro音频音乐",
         "suno"
       ],
-      "latest": "0.1.0",
+      "latest": "0.1.1",
       "versions": [
         {
           "version": "0.1.0",
@@ -791,13 +788,35 @@
             "api.uselg.top"
           ],
           "baseUrl": "https://api.ai-media.vip",
-          "auth": "api_key"
+          "auth": "api_key",
+          "upstreams": [
+            "vendor"
+          ]
+        },
+        {
+          "version": "0.1.1",
+          "path": "plugins/tasks/uselgv0-1/0.1.1/plugin.js",
+          "sha256": "d83bcccc992b23c53c7913436857b967ea1c944378c04e243fbd262508c145c7",
+          "minApiVersion": 1,
+          "kind": "task",
+          "allowedHosts": [
+            "api.ai-media.vip",
+            "api.uselg.top"
+          ],
+          "baseUrl": "https://api.ai-media.vip",
+          "auth": "api_key",
+          "upstreams": [
+            "new_api"
+          ]
         }
       ],
       "iconFile": {
         "path": "plugins/tasks/uselgv0-1/icon.svg",
         "sha256": "0ce3ca365941c01420c701af66db756c5520e9050768600781407e839a13c477"
-      }
+      },
+      "upstreams": [
+        "new_api"
+      ]
     }
   ]
 }
